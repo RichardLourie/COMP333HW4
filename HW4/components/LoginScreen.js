@@ -5,9 +5,34 @@ const LoginScreen = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    // TODO: Implement real login logic here
-    Alert.alert('Login Attempt', `Username: ${username} Password: ${password}`);
+  const handleLogin = async () => {
+    try {
+      
+      const response = await fetch(`http://10.0.2.2/index.php/user/verify?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const textResponse = await response.text();
+      const isSuccess = textResponse.includes('true');
+
+      if (isSuccess) {
+        // Extract the message manually using a regular expression or string functions
+        Alert.alert('Login Successful');
+      } else {
+        Alert.alert('Login Failed');
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      Alert.alert("Error", error.toString());
+    }
   };
 
   return (

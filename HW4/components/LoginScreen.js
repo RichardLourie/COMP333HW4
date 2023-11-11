@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const LoginScreen = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigation = useNavigation();
 
   const handleLogin = async () => {
     try {
@@ -26,6 +28,7 @@ const LoginScreen = () => {
       if (isSuccess) {
         // Extract the message manually using a regular expression or string functions
         Alert.alert('Login Successful');
+        navigation.navigate('Main');
       } else {
         Alert.alert('Login Failed');
       }

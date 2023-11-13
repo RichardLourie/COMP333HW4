@@ -2,25 +2,32 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const LoginScreen = () => {
+const AddSongScreen = () => {
   const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [artist, setArtist] = useState('');
+  const [song, setSong] = useState('');
+  const [rating, setRating] = useState('');
   const navigation = useNavigation();
 
-  const handleLogin = async () => {
+  const handleAddSong = async () => {
     try {
-      
-      const response = await fetch(`http://10.0.2.2/index.php/user/verify?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`, {
+      // Construct the API endpoint with query parameters
+      const query = `username=${encodeURIComponent(username)}&artist=${encodeURIComponent(artist)}&song=${encodeURIComponent(song)}&rating=${encodeURIComponent(rating)}`;
+      const url = `http://10.0.2.2/index.php/song/create?${query}`;
+
+      // Make the POST request to the API
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json'
         },
       });
-      
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
+
 
       const jsonResponse = await response.json();
 
@@ -28,19 +35,8 @@ const LoginScreen = () => {
         Alert.alert('Success', jsonResponse.message);
         navigation.navigate('Main');
       } else {
-        Alert.alert('Error', (jsonResponse.message) || 'Failed to login');
+        Alert.alert('Error', jsonResponse.message);
       }
-      /*
-      const textResponse = await response.text();
-      const isSuccess = textResponse.includes('true');
-
-      if (isSuccess) {
-        // Extract the message manually using a regular expression or string functions
-        Alert.alert('Login Successful');
-        navigation.navigate('Main');
-      } else {
-        Alert.alert('Login Failed');
-      }*/
     } catch (error) {
       console.error("Error:", error);
       Alert.alert("Error", error.toString());
@@ -49,22 +45,33 @@ const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+      <Text style={styles.title}>Add a New Song</Text>
       <TextInput
         style={styles.input}
         placeholder="Username"
         value={username}
         onChangeText={setUsername}
-        autoCapitalize="none"
       />
       <TextInput
         style={styles.input}
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
+        placeholder="Artist"
+        value={artist}
+        onChangeText={setArtist}
       />
-      <Button title="Log In" onPress={handleLogin} />
+      <TextInput
+        style={styles.input}
+        placeholder="Song"
+        value={song}
+        onChangeText={setSong}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Rating"
+        value={rating}
+        onChangeText={setRating}
+        keyboardType="numeric"
+      />
+      <Button title="Add Song" onPress={handleAddSong} />
     </View>
   );
 };
@@ -89,4 +96,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default AddSongScreen;

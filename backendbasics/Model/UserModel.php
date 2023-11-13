@@ -84,18 +84,18 @@ class UserModel extends Database
                 // Passwords match, so it's a successful login.
                 $response['success'] = true; 
                 $response['message '] = "user verified";
-                return json_encode($response);
+                return $response;
             } else {
                 $response['success'] = false; 
                 $response['message '] = "wrong user id or password";
-                return json_encode($response);
+                return $response;
 
             }
         } else {
             // No user with the entered username found.
             $response['success'] = false; 
             $response['message '] = "user does not exist";
-            return json_encode($response);
+            return $response;
         }
     }
 

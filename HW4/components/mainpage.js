@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const MainPage = () => {
   const [ratings, setRatings] = useState([]);
+  const navigation = useNavigation();
 
   useEffect(() => {
     const fetchRatings = async () => {
@@ -29,6 +31,10 @@ const MainPage = () => {
 
   return (
     <View style={styles.container}>
+      <Button
+        title="Add Rating"
+        onPress={() => navigation.navigate('addSong')}
+      />
       <FlatList
         data={ratings}
         keyExtractor={item => item.id.toString()}

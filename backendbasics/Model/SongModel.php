@@ -72,7 +72,7 @@ class SongModel extends Database
         
         if ($stmt->num_rows == 0) {
             $response['message'] = "Username does not exist in users table!";
-            return json_encode($response);
+            return $response;
         }
 
         // Check if the song by the same artist already exists for the user
@@ -87,7 +87,7 @@ class SongModel extends Database
 
         if ($songCount > 0) {
             $response['message'] = "Cannot add a duplicate!";
-            return json_encode($response);
+            return $response;
         }
 
         $insertUserQuery = "INSERT INTO ratings (username, artist, song, rating) VALUES (?, ?, ?, ?)";
@@ -101,7 +101,7 @@ class SongModel extends Database
             $response['message'] = "Song add failed";
         }
         
-        return json_encode($response);  
+        return $response;  
     }
 
     //update an entry
@@ -127,11 +127,11 @@ class SongModel extends Database
             // Update successful
             $response['success'] = true;
             $response['message'] = "Successfully updated rating!";
-            return json_encode($response);
+            return $response;
         } else {
             // Update failed
             $response['message'] = "failure";
-            return json_encode($response);
+            return $response;
         }
 
         // Close the prepared statement

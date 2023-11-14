@@ -20,7 +20,7 @@ class UserController extends BaseController
             try {
 
                 $userModel = new UserModel();
-                $intLimit = 10;
+                $intLimit = 40;
 
                 if (isset($arrQueryStringParams['limit']) && $arrQueryStringParams['limit']) {
 

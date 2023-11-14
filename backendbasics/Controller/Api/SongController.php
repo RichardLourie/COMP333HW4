@@ -20,7 +20,7 @@ Handles request to list all songs.
             try {
 
                 $songModel = new songModel();
-                $intLimit = 10;
+                $intLimit = 40;
 
                 if (isset($arrQueryStringParams['limit']) && $arrQueryStringParams['limit']) {
 

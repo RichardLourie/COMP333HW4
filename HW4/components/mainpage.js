@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, FlatList, StyleSheet, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { UserContext } from '../UserContext';
 
 const MainPage = () => {
   const [ratings, setRatings] = useState([]);
   const navigation = useNavigation();
+  const { username } = useContext(UserContext);
 
   useEffect(() => {
     const fetchRatings = async () => {
@@ -31,6 +33,7 @@ const MainPage = () => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.username}>Welcome, {username}!</Text>
       <Button
         title="Add Rating"
         onPress={() => navigation.navigate('addSong')}
@@ -67,6 +70,12 @@ const styles = StyleSheet.create({
     marginRight: 10,
     flex: 1,
   },
+  username: {
+  fontSize: 18,
+  fontWeight: 'bold',
+  padding: 10,
+  textAlign: 'center',
+},
 });
 
 export default MainPage;

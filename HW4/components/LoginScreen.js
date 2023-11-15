@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { UserContext } from '../UserContext.js';
 
 const LoginScreen = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
+  const { setUsername: setGlobalUsername } = useContext(UserContext);
 
   const handleLogin = async () => {
     try {
@@ -26,21 +28,11 @@ const LoginScreen = () => {
 
       if (jsonResponse.success) {
         Alert.alert('Success', jsonResponse.message);
+        setGlobalUsername(username);
         navigation.navigate('Main');
       } else {
         Alert.alert('Error', (jsonResponse.message) || 'Failed to login');
       }
-      /*
-      const textResponse = await response.text();
-      const isSuccess = textResponse.includes('true');
-
-      if (isSuccess) {
-        // Extract the message manually using a regular expression or string functions
-        Alert.alert('Login Successful');
-        navigation.navigate('Main');
-      } else {
-        Alert.alert('Login Failed');
-      }*/
     } catch (error) {
       console.error("Error:", error);
       Alert.alert("Error", error.toString());

@@ -12,7 +12,7 @@ const SignupScreen = () => {
 
   const handleSignup = async () => {
     try {
-      const response = await fetch(`http://10.0.2.2/index.php/user/create?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}&confirmpassword=${encodeURIComponent(confirmPassword)}`, {
+      const response = await fetch(`http://172.21.51.242/index.php/user/create?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}&confirmpassword=${encodeURIComponent(confirmPassword)}`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',

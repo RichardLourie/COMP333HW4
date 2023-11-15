@@ -13,7 +13,7 @@ const AddSongScreen = () => {
     try {
       // Construct the API endpoint with query parameters
       const query = `username=${encodeURIComponent(username)}&artist=${encodeURIComponent(artist)}&song=${encodeURIComponent(song)}&rating=${encodeURIComponent(rating)}`;
-      const url = `http://10.0.2.2/index.php/song/create?${query}`;
+      const url = `http://172.21.51.242/index.php/song/create?${query}`;
 
       // Make the POST request to the API
       const response = await fetch(url, {

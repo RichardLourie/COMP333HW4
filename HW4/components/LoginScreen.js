@@ -16,7 +16,7 @@ const LoginScreen = () => {
   const handleLogin = async () => {
     try {
       
-      const response = await fetch(`http://10.0.2.2/index.php/user/verify?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`, {
+      const response = await fetch(`http://172.21.51.242/index.php/user/verify?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',

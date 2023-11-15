@@ -11,7 +11,7 @@ const MainPage = () => {
   useEffect(() => {
     const fetchRatings = async () => {
       try {
-        const response = await fetch('http://10.0.2.2/index.php/song/list');
+        const response = await fetch('http://172.21.51.242/index.php/song/list');
         const data = await response.json();
         setRatings(data);
       } catch (error) {

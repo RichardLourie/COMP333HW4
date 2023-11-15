@@ -13,7 +13,7 @@ const MainPage = () => {
   useEffect(() => {
     const fetchRatings = async () => {
       try {
-        const response = await fetch('http://${ipAddress}/index.php/song/list');
+        const response = await fetch(`http://${ipAddress}/index.php/song/list`);
         const data = await response.json();
         setRatings(data);
       } catch (error) {

@@ -38,6 +38,7 @@ const DeletePage = ({ route }) => {
     <View style={styles.container}>
       <Text style={styles.text}>Are you sure you want to delete this rating?</Text>
       <Button title="Delete Rating" onPress={confirmDeletion} />
+      <Button title="Nevermind" onPress={() => navigation.goBack()} />
     </View>
   );
 };

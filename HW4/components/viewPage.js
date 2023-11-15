@@ -4,7 +4,7 @@ import { View, Text, Button, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const ViewPage = ({ route }) => {
-  const { itemId, itemArtist, itemSong, itemRating } = route.params;
+  const { itemArtist, itemSong, itemRating } = route.params;
   const navigation = useNavigation();
 
   const handleBack = () => {
@@ -14,9 +14,11 @@ const ViewPage = ({ route }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Song Information</Text>
-      <Text>Artist: {itemArtist}</Text>
-      <Text>Song: {itemSong}</Text>
-      <Text>Rating: {itemRating}</Text>
+      <View style={styles.songInfoContainer}>
+        <Text>Artist: {itemArtist}</Text>
+        <Text>Song: {itemSong}</Text>
+        <Text>Rating: {itemRating}</Text>
+      </View>
       <Button title="Back" onPress={handleBack} />
     </View>
   );
@@ -33,6 +35,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
     textAlign: 'center',
+  },
+  songInfoContainer: {
+    alignItems: 'center', // Center content horizontally
   },
 });
 

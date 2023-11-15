@@ -9,6 +9,7 @@ import DeletePage from './components/deletepage.js';
 import { UserProvider } from './UserContext.js'; 
 import { ApiProvider } from './APIContext';
 import ViewPage from './components/viewPage.js';
+import EditPage from './components/editPage.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,7 +24,8 @@ function App() {
           <Stack.Screen name="addSong" component={addSongPage} />
           <Stack.Screen name="signup" component={signup} />
           <Stack.Screen name="deletepage" component={DeletePage} />
-          <Stack.Screen name="ViewPage" component={ViewPage} />
+          <Stack.Screen name="viewpage" component={ViewPage} />
+          <Stack.Screen name="editpage" component={EditPage} />
         </Stack.Navigator>
       </NavigationContainer>
     </UserProvider>

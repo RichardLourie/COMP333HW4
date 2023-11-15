@@ -6,11 +6,13 @@ import MainPage from './components/mainpage.js';
 import signup from './components/signup.js';
 import addSongPage from './components/addSong.js';
 import { UserProvider } from './UserContext.js'; 
+import { ApiProvider } from './APIContext';
 
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
+    <ApiProvider>
     <UserProvider>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Login">
@@ -21,6 +23,7 @@ function App() {
         </Stack.Navigator>
       </NavigationContainer>
     </UserProvider>
+    </ApiProvider>
   );
 }
 

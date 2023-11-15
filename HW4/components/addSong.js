@@ -5,13 +5,13 @@ import { UserContext } from '../UserContext.js';
 import { useApi } from '../APIContext.js'; // Import the useApi hook
 
 const AddSongScreen = () => {
-  // const [username, setUsername] = useState('');
+  const [username, setUsername] = useState('');
   const [artist, setArtist] = useState('');
   const [song, setSong] = useState('');
   const [rating, setRating] = useState('');
   const navigation = useNavigation();
   const { ipAddress } = useApi();
-  const { username } = useContext(UserContext);
+  
 
   const handleAddSong = async () => {
     try {
@@ -50,12 +50,12 @@ const AddSongScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Add a New Song</Text>
-      {/* <TextInput
+      <TextInput
         style={styles.input}
         placeholder="Username"
         value={username}
         onChangeText={setUsername}
-      /> */}
+      />
       <TextInput
         style={styles.input}
         placeholder="Artist"

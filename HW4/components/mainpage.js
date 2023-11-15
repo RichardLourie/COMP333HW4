@@ -77,6 +77,7 @@ const MainPage = () => {
         onPress={() => navigation.navigate('addSong')}
       />
       <FlatList
+        style={styles.ratings}
         data={ratings}
         keyExtractor={item => item.id.toString()}
         renderItem={renderItem}
@@ -94,6 +95,7 @@ const MainPage = () => {
           <Text style={styles.statsTitle}>Artist Statistics</Text>
           <View style={styles.stats}>
             <FlatList
+              contentContainerStyle={{ flexGrow: 1 }}
               data={statsData.artists}
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ item }) => (
@@ -106,6 +108,7 @@ const MainPage = () => {
           <Text style={styles.statsTitle}>Song Statistics</Text>
           <View style={styles.stats}>
             <FlatList
+              contentContainerStyle={{ flexGrow: 1 }}
               data={statsData.songs}
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ item }) => (
@@ -125,7 +128,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 20,
-    marginBottom: 20,
+    marginBottom: 0, // Adjust the marginBottom value as needed
   },
   item: {
     flexDirection: 'row',
@@ -151,11 +154,23 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   statsContainer: {
+    flex: 1,
     alignItems: 'center',
+    marginTop: 10,
+    maxHeight: '50%',
   },
   stats: {
-    width: '80%', // Adjust the width as needed
+    flex: 1,
+    width: '100%',
+    // maxHeight: '50%', // Set the max height to 50% of the screen height
+    marginBottom: 0,
+  },
+  ratings: {
+    flex: 1,
+    marginBottom: 0,
+    maxHeight: '50%',
   },
 });
+
 
 export default MainPage;

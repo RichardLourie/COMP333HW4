@@ -4,6 +4,7 @@ import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useApi } from '../APIContext.js';
 
+// EditPage.js for editing a song's information
 const EditPage = ({ route }) => {
   const { itemId, itemArtist, itemSong, itemRating } = route.params;
   const navigation = useNavigation();
@@ -13,6 +14,7 @@ const EditPage = ({ route }) => {
   const [song, setSong] = useState(itemSong);
   const [rating, setRating] = useState(itemRating.toString());
 
+//   // send api call to update song
   const handleUpdate = async () => {
     try {
       const response = await fetch(`http://${ipAddress}/index.php/song/update?ratingid=${itemId}&artist=${encodeURIComponent(artist)}&song=${encodeURIComponent(song)}&rating=${encodeURIComponent(rating)}`, {
@@ -42,6 +44,7 @@ const EditPage = ({ route }) => {
     }
   };
 
+//   // render the edit page
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Edit Rating</Text>
@@ -70,6 +73,7 @@ const EditPage = ({ route }) => {
   );
 };
 
+// Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -11,8 +11,9 @@ const LoginScreen = () => {
   const { setUsername: setGlobalUsername } = useContext(UserContext);
   const { ipAddress } = useApi();
 
+  // navigate to signup page
   const navigateToSignup = () => {
-    navigation.navigate('signup'); // Use the correct screen name as per your navigation setup
+    navigation.navigate('signup');
   };
 
   const handleLogin = async () => {
@@ -45,6 +46,7 @@ const LoginScreen = () => {
     }
   };
 
+  // render the login screen
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Login</Text>
@@ -68,6 +70,7 @@ const LoginScreen = () => {
   );
 };
 
+// styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,

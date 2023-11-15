@@ -8,6 +8,7 @@ const DeletePage = ({ route }) => {
   const navigation = useNavigation();
   const { ipAddress } = useApi();
 
+  // confirm deletion before deleting
   const confirmDeletion = () => {
     Alert.alert(
       "Confirm Deletion",
@@ -46,6 +47,7 @@ const DeletePage = ({ route }) => {
     }
   };
 
+  // render the delete page
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Are you sure you want to delete this rating?</Text>

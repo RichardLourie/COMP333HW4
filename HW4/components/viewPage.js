@@ -8,10 +8,7 @@ const ViewPage = ({ route }) => {
   const { itemArtist, itemSong, itemRating } = route.params;
   const navigation = useNavigation();
 
-  const handleBack = () => {
-    navigation.goBack();
-  };
-
+//   // render the view page
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Song Information</Text>
@@ -20,7 +17,7 @@ const ViewPage = ({ route }) => {
         <Text>Song: {itemSong}</Text>
         <Text>Rating: {itemRating}</Text>
       </View>
-      <Button title="Back" onPress={handleBack} />
+      <Button title="Back" onPress={navigation.goBack()} />
     </View>
   );
 };

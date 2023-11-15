@@ -11,8 +11,8 @@ const MainPage = () => {
   const { username } = useContext(UserContext);
   const { ipAddress } = useApi();
 
+// get song info and stats data when the screen is focused
   useFocusEffect(
-    // get song info and stats data when the screen is focused
     React.useCallback(() => {
       const fetchData = async () => {
         try {
@@ -77,8 +77,10 @@ const MainPage = () => {
     });
   }, [ipAddress, navigation]);*/
 
+  // render each row of the flatlist
   const renderItem = ({ item }) => (
     <View style={styles.item}>
+      <Text style={styles.cell}>{item.username}</Text>
       <Text style={styles.cell}>{item.artist}</Text>
       <Text style={styles.cell}>{item.song}</Text>
       <Text style={styles.cell}>{item.rating}</Text>
@@ -101,6 +103,7 @@ const MainPage = () => {
     </View>
   );
 
+  // render the main page
   return (
     <View style={styles.container}>
       <Text style={styles.username}>Welcome, {username}!</Text>
@@ -115,6 +118,7 @@ const MainPage = () => {
         renderItem={renderItem}
         ListHeaderComponent={
           <View style={styles.item}>
+            <Text style={styles.cell}>Username</Text>
             <Text style={styles.cell}>Artist</Text>
             <Text style={styles.cell}>Song</Text>
             <Text style={styles.cell}>Rating</Text>
@@ -155,6 +159,7 @@ const MainPage = () => {
   );
 };
 
+// Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,

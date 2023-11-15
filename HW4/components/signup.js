@@ -12,6 +12,7 @@ const SignupScreen = () => {
   const { setUsername: setGlobalUsername } = useContext(UserContext);
   const { ipAddress } = useApi();
 
+  // send signup api call
   const handleSignup = async () => {
     try {
       const response = await fetch(`http://${ipAddress}/index.php/user/create?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}&confirmpassword=${encodeURIComponent(confirmPassword)}`, {
@@ -41,6 +42,7 @@ const SignupScreen = () => {
     }
   };
 
+  // render the signup screen
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Sign Up</Text>
@@ -70,6 +72,7 @@ const SignupScreen = () => {
   );
 };
 
+// styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,

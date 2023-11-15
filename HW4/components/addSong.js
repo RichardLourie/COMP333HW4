@@ -12,7 +12,7 @@ const AddSongScreen = () => {
   const { ipAddress } = useApi();
   const { username } = useContext(UserContext);
   
-
+// send api call to add song
   const handleAddSong = async () => {
     try {
       // Construct the API endpoint with query parameters
@@ -46,7 +46,7 @@ const AddSongScreen = () => {
       Alert.alert("Error", error.toString());
     }
   };
-
+  // render the add song screen
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Add a New Song</Text>

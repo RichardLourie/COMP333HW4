@@ -25,13 +25,19 @@ const MainPage = () => {
   }, []);
 
   const renderItem = ({ item }) => (
-    <View style={styles.item}>
-      <Text style={styles.cell}>{item.username}</Text>
-      <Text style={styles.cell}>{item.artist}</Text>
-      <Text style={styles.cell}>{item.song}</Text>
-      <Text style={styles.cell}>{item.rating}</Text>
-    </View>
-  );
+  <View style={styles.item}>
+    <Text style={styles.cell}>{item.username}</Text>
+    <Text style={styles.cell}>{item.artist}</Text>
+    <Text style={styles.cell}>{item.song}</Text>
+    <Text style={styles.cell}>{item.rating}</Text>
+    {username === item.username && (
+      <Button
+        title="Delete"
+        OnPress={() => navigation.navigate('deletepage', { itemId: item.id })}
+      />  
+    )}
+  </View>
+);
 
   return (
     <View style={styles.container}>

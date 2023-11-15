@@ -1,5 +1,5 @@
 # COMP333HW4
- Wesleyan University COMP333 HW4
+ Wesleyan University COMP333 HW4 
 
 IP Address Setup: open the comp333hw4 directory. Navigate to HW4>APIContext.js and set the IP defined in the line:
 const [ipAddress, setIpAddress] = useState('172.21.51.242');
@@ -29,4 +29,11 @@ CREATE TABLE ratings (
     FOREIGN KEY(username) REFERENCES users(username)
 );
 "
+
+Directory Structure: 
+backendbasics contains our backend files. 
+HW4 contains App.js which is the main controller file. 
+HW4 contains UserContext and APIContext which are used to setup global variables. 
+HW4 also contains components folder which houses the various pages in our app. 
+
 

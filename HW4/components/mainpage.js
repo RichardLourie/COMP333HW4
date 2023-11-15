@@ -33,9 +33,14 @@ const MainPage = () => {
     {username === item.username && (
       <Button
         title="Delete"
-        OnPress={() => navigation.navigate('deletepage', { itemId: item.id })}
+        onPress={() => navigation.navigate('deletepage', { itemId: item.id })}
       />  
+      
     )}
+    <Button
+        title="View"
+        onPress={() => navigation.navigate('ViewPage', { itemId: item.id, itemArtist: item.artist, itemSong: item.song, itemRating: item.rating})}
+      />  
   </View>
 );
 

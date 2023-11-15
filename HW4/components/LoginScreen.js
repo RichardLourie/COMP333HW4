@@ -2,12 +2,14 @@ import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { UserContext } from '../UserContext.js';
+import { useApi } from '../APIContext.js'; // Import the useApi hook
 
 const LoginScreen = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
   const { setUsername: setGlobalUsername } = useContext(UserContext);
+  const { ipAddress } = useApi();
 
   const navigateToSignup = () => {
     navigation.navigate('signup'); // Use the correct screen name as per your navigation setup
@@ -16,7 +18,7 @@ const LoginScreen = () => {
   const handleLogin = async () => {
     try {
       
-      const response = await fetch(`http://172.21.51.242/index.php/user/verify?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`, {
+      const response = await fetch(`http://${ipAddress}/index.php/user/verify?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',

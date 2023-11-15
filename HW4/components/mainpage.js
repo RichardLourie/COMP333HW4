@@ -29,7 +29,20 @@ const MainPage = () => {
     };
 
     fetchData();
-  }, [ipAddress]); // Include ipAddress as a dependency for useEffect
+
+    navigation.setOptions({
+      headerLeft: () => (
+        <Button
+          title="Logout"
+          onPress={() => {
+            // Implement your logout logic here
+            // For example, navigate to the login screen
+            navigation.navigate('Login'); // Adjust the screen name as needed
+          }}
+        />
+      ),
+    });
+  }, [ipAddress, navigation]);
 
   const renderItem = ({ item }) => (
     <View style={styles.item}>

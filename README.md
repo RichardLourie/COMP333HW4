@@ -1,5 +1,6 @@
 # COMP333HW4
  Wesleyan University COMP333 HW4 
+ Collaborators: Ari Eaton and Richard Lourie. 50/50 workload split. 
 
 IP Address Setup: open the comp333hw4 directory. Navigate to HW4>APIContext.js and set the IP defined in the line:
 const [ipAddress, setIpAddress] = useState('172.21.51.242');

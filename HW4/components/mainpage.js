@@ -81,7 +81,6 @@ const MainPage = () => {
 
   const renderItem = ({ item }) => (
     <View style={styles.item}>
-      <Text style={styles.cell}>{item.username}</Text>
       <Text style={styles.cell}>{item.artist}</Text>
       <Text style={styles.cell}>{item.song}</Text>
       <Text style={styles.cell}>{item.rating}</Text>
@@ -118,7 +117,6 @@ const MainPage = () => {
         renderItem={renderItem}
         ListHeaderComponent={
           <View style={styles.item}>
-            <Text style={styles.cell}>Username</Text>
             <Text style={styles.cell}>Artist</Text>
             <Text style={styles.cell}>Song</Text>
             <Text style={styles.cell}>Rating</Text>

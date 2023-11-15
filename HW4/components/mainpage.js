@@ -2,16 +2,18 @@ import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, FlatList, StyleSheet, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { UserContext } from '../UserContext';
+import { useApi } from '../APIContext.js'; // Import the useApi hook
 
 const MainPage = () => {
   const [ratings, setRatings] = useState([]);
   const navigation = useNavigation();
   const { username } = useContext(UserContext);
+  const { ipAddress } = useApi();
 
   useEffect(() => {
     const fetchRatings = async () => {
       try {
-        const response = await fetch('http://172.21.51.242/index.php/song/list');
+        const response = await fetch('http://${ipAddress}/index.php/song/list');
         const data = await response.json();
         setRatings(data);
       } catch (error) {

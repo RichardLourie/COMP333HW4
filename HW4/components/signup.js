@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { UserContext } from '../UserContext.js';
+import { useApi } from '../APIContext.js'; // Import the useApi hook
 
 const SignupScreen = () => {
   const [username, setUsername] = useState('');
@@ -9,6 +10,7 @@ const SignupScreen = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigation = useNavigation();
   const { setUsername: setGlobalUsername } = useContext(UserContext);
+  const { ipAddress } = useApi();
 
   const handleSignup = async () => {
     try {

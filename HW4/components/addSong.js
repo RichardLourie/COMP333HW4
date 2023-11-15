@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useApi } from '../APIContext.js'; // Import the useApi hook
 
 const AddSongScreen = () => {
   const [username, setUsername] = useState('');
@@ -8,12 +9,13 @@ const AddSongScreen = () => {
   const [song, setSong] = useState('');
   const [rating, setRating] = useState('');
   const navigation = useNavigation();
+  const { ipAddress } = useApi();
 
   const handleAddSong = async () => {
     try {
       // Construct the API endpoint with query parameters
       const query = `username=${encodeURIComponent(username)}&artist=${encodeURIComponent(artist)}&song=${encodeURIComponent(song)}&rating=${encodeURIComponent(rating)}`;
-      const url = `http://172.21.51.242/index.php/song/create?${query}`;
+      const url = `http://${ipAddress}/index.php/song/create?${query}`;
 
       // Make the POST request to the API
       const response = await fetch(url, {

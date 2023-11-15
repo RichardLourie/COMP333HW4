@@ -3,27 +3,23 @@ import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { UserContext } from '../UserContext.js';
 
-const LoginScreen = () => {
+const SignupScreen = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const navigation = useNavigation();
   const { setUsername: setGlobalUsername } = useContext(UserContext);
 
-  const navigateToSignup = () => {
-    navigation.navigate('signup'); // Use the correct screen name as per your navigation setup
-  };
-
-  const handleLogin = async () => {
+  const handleSignup = async () => {
     try {
-      
-      const response = await fetch(`http://10.0.2.2/index.php/user/verify?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`, {
+      const response = await fetch(`http://10.0.2.2/index.php/user/create?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}&confirmpassword=${encodeURIComponent(confirmPassword)}`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json'
         },
       });
-        
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -31,11 +27,11 @@ const LoginScreen = () => {
       const jsonResponse = await response.json();
 
       if (jsonResponse.success) {
-        Alert.alert('Success', jsonResponse.message);
+        Alert.alert('Success', 'You have successfully signed up!');
         setGlobalUsername(username);
-        navigation.navigate('Main');
+        navigation.navigate('Login'); // Assuming you have a login screen to navigate to after signup
       } else {
-        Alert.alert('Error', (jsonResponse.message) || 'Failed to login');
+        Alert.alert('Error', jsonResponse.message || 'Failed to sign up');
       }
     } catch (error) {
       console.error("Error:", error);
@@ -45,7 +41,7 @@ const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+      <Text style={styles.title}>Sign Up</Text>
       <TextInput
         style={styles.input}
         placeholder="Username"
@@ -60,8 +56,14 @@ const LoginScreen = () => {
         onChangeText={setPassword}
         secureTextEntry
       />
-      <Button title="Log In" onPress={handleLogin} />
-      <Button title="No account? Sign Up!" onPress={navigateToSignup} />
+      <TextInput
+        style={styles.input}
+        placeholder="Confirm Password"
+        value={confirmPassword}
+        onChangeText={setConfirmPassword}
+        secureTextEntry
+      />
+      <Button title="Sign Up" onPress={handleSignup} />
     </View>
   );
 };
@@ -86,4 +88,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default SignupScreen;

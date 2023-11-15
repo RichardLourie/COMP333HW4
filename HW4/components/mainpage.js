@@ -12,6 +12,7 @@ const MainPage = () => {
   const { ipAddress } = useApi();
 
   useFocusEffect(
+    // get song info and stats data when the screen is focused
     React.useCallback(() => {
       const fetchData = async () => {
         try {
@@ -41,9 +42,6 @@ const MainPage = () => {
         />
       ),
     });
-      return () => {
-        // Optional cleanup logic
-      };
     }, [ipAddress, navigation])
     );
   /*

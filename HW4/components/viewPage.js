@@ -1,9 +1,10 @@
-// ViewPage.js
+// ViewPage.js for viewing a song's information
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const ViewPage = ({ route }) => {
+// song info passed in as route params
   const { itemArtist, itemSong, itemRating } = route.params;
   const navigation = useNavigation();
 
@@ -24,6 +25,7 @@ const ViewPage = ({ route }) => {
   );
 };
 
+// Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,

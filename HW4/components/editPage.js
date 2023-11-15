@@ -11,7 +11,7 @@ const EditPage = ({ route }) => {
 
   const [artist, setArtist] = useState(itemArtist);
   const [song, setSong] = useState(itemSong);
-  const [rating, setRating] = useState(itemRating);
+  const [rating, setRating] = useState(itemRating.toString());
 
   const handleUpdate = async () => {
     try {

@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { UserContext } from '../UserContext.js';
 import { useApi } from '../APIContext.js'; // Import the useApi hook
 
 const AddSongScreen = () => {
-  const [username, setUsername] = useState('');
   const [artist, setArtist] = useState('');
   const [song, setSong] = useState('');
   const [rating, setRating] = useState('');
   const navigation = useNavigation();
   const { ipAddress } = useApi();
+  const { username } = useContext(UserContext);
   
 
   const handleAddSong = async () => {
     try {
       // Construct the API endpoint with query parameters
-      const query = `username=${encodeURIComponent(username)}&artist=${encodeURIComponent(artist)}&song=${encodeURIComponent(song)}&rating=${encodeURIComponent(rating)}`;
+      const query = `username=${username}&artist=${encodeURIComponent(artist)}&song=${encodeURIComponent(song)}&rating=${encodeURIComponent(rating)}`;
       const url = `http://${ipAddress}/index.php/song/create?${query}`;
 
       // Make the POST request to the API
@@ -50,12 +50,6 @@ const AddSongScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Add a New Song</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
-      />
       <TextInput
         style={styles.input}
         placeholder="Artist"

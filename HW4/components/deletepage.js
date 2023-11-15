@@ -1,10 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, Button, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useApi } from '../APIContext.js'; // Import the useApi hook
 
 const DeletePage = ({ route }) => {
   const { itemId } = route.params;
   const navigation = useNavigation();
+  const { ipAddress } = useApi();
 
   const confirmDeletion = () => {
     Alert.alert(
@@ -22,9 +24,19 @@ const DeletePage = ({ route }) => {
 
   const deleteRating = async () => {
     try {
-      const response = await fetch(`http://10.0.2.2/index.php/song/delete?ratingid=${itemId}`);
+      const response = await fetch(`http://${ipAddress}/index.php/song/delete?ratingid=${itemId}`, 
+          {
+          method: 'POST',
+          headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+      });
+
+
       const data = await response.json();
       if (data.success) {
+        Alert.alert(data.message)
         navigation.navigate('Main');
       } else {
         alert("Error deleting rating.");

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, FlatList, StyleSheet, Button } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { UserContext } from '../UserContext';
 import { useApi } from '../APIContext.js'; // Import the useApi hook
 
@@ -11,6 +11,42 @@ const MainPage = () => {
   const { username } = useContext(UserContext);
   const { ipAddress } = useApi();
 
+  useFocusEffect(
+    React.useCallback(() => {
+      const fetchData = async () => {
+        try {
+          // Fetch ratings data
+          const responseRatings = await fetch(`http://${ipAddress}/index.php/song/list`);
+          const dataRatings = await responseRatings.json();
+          setRatings(dataRatings);
+
+          // Fetch stats data
+          const responseStats = await fetch(`http://${ipAddress}/index.php/song/stats`);
+          const dataStats = await responseStats.json();
+          setStatsData(dataStats);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+
+      fetchData();
+
+      navigation.setOptions({
+      headerLeft: () => (
+        <Button
+          title="Logout"
+          onPress={() => {
+            navigation.navigate('Login');
+          }}
+        />
+      ),
+    });
+      return () => {
+        // Optional cleanup logic
+      };
+    }, [ipAddress, navigation])
+    );
+  /*
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -27,8 +63,7 @@ const MainPage = () => {
         console.error('Error fetching data:', error);
       }
     };
-
-    fetchData();
+    fetchData(); 
 
     navigation.setOptions({
       headerLeft: () => (
@@ -42,7 +77,7 @@ const MainPage = () => {
         />
       ),
     });
-  }, [ipAddress, navigation]);
+  }, [ipAddress, navigation]);*/
 
   const renderItem = ({ item }) => (
     <View style={styles.item}>

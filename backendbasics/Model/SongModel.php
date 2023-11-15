@@ -141,7 +141,7 @@ class SongModel extends Database
     //deletes a rating
     public function deleteRatings($postData){
         $response = [
-            'success' => true,
+            'success' => false,
             'message' => 'rating deleted',
         ];
 
@@ -150,7 +150,16 @@ class SongModel extends Database
         $query = "DELETE FROM ratings WHERE id = ?";
         $stmt = $this->connection->prepare($query);
         $stmt->bind_param("i", $id);
-        $stmt->execute();
+        if (mysqli_stmt_execute($stmt)) {
+            // Update successful
+            $response['success'] = true;
+            $response['message'] = "Successfully deleted rating!";
+        } else {
+            // Update failed
+            $response['message'] = "failure of deletion";
+        }
+        /*$stmt->execute();
+        */
         $stmt->close();
 
         return $response;

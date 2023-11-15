@@ -106,57 +106,6 @@ const MainPage = () => {
       )}
     </View>
   );
-
-  return (
-      <View style={styles.container}>
-        <Text style={styles.username}>Welcome, {username}!</Text>
-        <Button
-          title="Add Rating"
-          onPress={() => navigation.navigate('addSong')}
-        />
-        <FlatList
-          data={ratings}
-          keyExtractor={item => item.id.toString()}
-          renderItem={renderItem}
-          ListHeaderComponent={
-            <View style={styles.item}>
-              <Text style={styles.cell}>Username</Text>
-              <Text style={styles.cell}>Artist</Text>
-              <Text style={styles.cell}>Song</Text>
-              <Text style={styles.cell}>Rating</Text>
-            </View>
-          }
-        />
-        {statsData && (
-          <View style={styles.statsContainer}>
-            <Text style={styles.statsTitle}>Artist Statistics</Text>
-            <View style={styles.stats}>
-              <FlatList
-                data={statsData.artists}
-                keyExtractor={(item, index) => index.toString()}
-                renderItem={({ item }) => (
-                  <Text>
-                    Artist: {item.artist}, Entry Count: {item.entry_count}, Average Rating: {item.average_rating}
-                  </Text>
-                )}
-              />
-            </View>
-            <Text style={styles.statsTitle}>Song Statistics</Text>
-            <View style={styles.stats}>
-              <FlatList
-                data={statsData.songs}
-                keyExtractor={(item, index) => index.toString()}
-                renderItem={({ item }) => (
-                  <Text>
-                    Song: {item.song}, Entry Count: {item.entry_count}, Average Rating: {item.average_rating}
-                  </Text>
-                )}
-              />
-            </View>
-          </View>
-        )}
-      </View>
-    );
 };
 
 const styles = StyleSheet.create({
